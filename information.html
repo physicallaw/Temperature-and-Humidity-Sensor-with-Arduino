@@ -20,7 +20,7 @@ else
 if (xmlDoc!=null)
 {
   xmlDoc.async=false;
-  xmlDoc.load("data.xml");
+  xmlDoc.load("d:\data.xml");
   var x=xmlDoc.getElementsByTagName("data");
   tem = x[0].getElementsByTagName("temperature")[0].childNodes[0].nodeValue;
   hum = x[0].getElementsByTagName("humidity")[0].childNodes[0].nodeValue;
