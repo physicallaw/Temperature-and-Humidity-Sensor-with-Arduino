@@ -1,0 +1,15 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <iframe src="information.html" width="520" height="300" frameborder="0" scrolling="no" name="member1">
+    </iframe>
+    <script language="javascript">
+      function iRefresh(){     
+        member1.location.href="information.html";
+        setTimeout("iRefresh()",2000);
+      }
+      iRefresh();
+    </script>
+  </body>
+</html>

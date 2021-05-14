@@ -1,0 +1,52 @@
+<html>
+<body>
+<script type="text/javascript">
+var xmlDoc=null;
+if (window.ActiveXObject)
+{
+  // IE용
+  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+}
+else if (document.implementation.createDocument)
+{
+  // Mozilla, Firefox, Opera, 기타 용
+  xmlDoc=document.implementation.createDocument("","",null);
+}
+else
+{
+  alert('XML을 사용못하는 브라우저임');
+}
+
+if (xmlDoc!=null)
+{
+  xmlDoc.async=false;
+  xmlDoc.load("data.xml");
+  var x=xmlDoc.getElementsByTagName("data");
+  tem = x[0].getElementsByTagName("temperature")[0].childNodes[0].nodeValue;
+  hum = x[0].getElementsByTagName("humidity")[0].childNodes[0].nodeValue;
+  year = x[0].getElementsByTagName("year")[0].childNodes[0].nodeValue;
+  mon = x[0].getElementsByTagName("mon")[0].childNodes[0].nodeValue;
+  day = x[0].getElementsByTagName("day")[0].childNodes[0].nodeValue;
+  hour = x[0].getElementsByTagName("hour")[0].childNodes[0].nodeValue;
+  min = x[0].getElementsByTagName("min")[0].childNodes[0].nodeValue;
+  sec = x[0].getElementsByTagName("sec")[0].childNodes[0].nodeValue;
+  document.write(year+'년'+mon+'월'+day+'일'+hour+':'+min+':'+sec+'<br><br>');
+  document.write('현재 온도 :'+tem+'℃<br>');
+  document.write('<img src="arrow.png" name="arrow1" style="position:absolute;"><br>');
+  document.arrow1.style.left = (tem-3)*500/38;
+  document.write('<img src="grad1.png"><br>');
+  document.write('현재 습도 :'+hum+'%RH<br>');
+  document.write('<img src="arrow.png" name="arrow2" style="position:absolute;"><br>');
+  document.arrow2.style.left = (hum)*5+12.5;
+  document.write('<img src="grad2.png"><br>');
+  xmlDoc.load("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1123073000");
+  var y=xmlDoc.getElementsByTagName("channel");
+  document.write(y[0].getElementsByTagName("pubDate")[0].childNodes[0].nodeValue+'<br>');
+  document.write(y[0].getElementsByTagName("item")[0].getElementsByTagName("category")[0].childNodes[0].nodeValue+'<br>');
+  document.write(y[0].getElementsByTagName("item")[0].getElementsByTagName("description")[0].getElementsByTagName("body")[0].getElementsByTagName("data")[0].getElementsByTagName("temp")[0].childNodes[0].nodeValue+'℃ ');
+  document.write(y[0].getElementsByTagName("item")[0].getElementsByTagName("description")[0].getElementsByTagName("body")[0].getElementsByTagName("data")[0].getElementsByTagName("reh")[0].childNodes[0].nodeValue+'%RH<br>');
+}
+</script>
+</body>
+</html>
+
